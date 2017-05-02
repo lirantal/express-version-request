@@ -1,12 +1,12 @@
 {
-  "name": "module-name",
+  "name": "express-version-request",
   "version": "1.0.0",
-  "description": "",
+  "description": "versions an incoming request to Express based on header or URL",
   "main": "index.js",
   "scripts": {
     "lint": "eslint *.js",
-    "test": "ava",
-    "test:watch": "ava --watch",
+    "test": "yarn lint && ava",
+    "test:watch": "yarn lint && ava --watch",
     "test:coverage": "yarn run lint && nyc --reporter=lcov ava --tap",
     "coverage:view": "opn coverage/lcov-report/index.html",
     "commit": "git-cz",
@@ -14,6 +14,18 @@
     "docs:api": "doxdox *.js --layout bootstrap --output docs/index.html",
     "docs:code": "docco *.js --output docs/code"
   },
+  "keywords": [
+    "express",
+    "api",
+    "version",
+    "versioned",
+    "versioning",
+    "routing",
+    "router",
+    "api versioning",
+    "api version",
+    "header"
+  ],
   "author": "Liran Tal",
   "license": "MIT",
   "devDependencies": {
