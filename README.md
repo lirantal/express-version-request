@@ -1,45 +1,79 @@
-# Module Name
+# express-version-request
+
+[![view on npm](http://img.shields.io/npm/v/express-version-request.svg)](https://www.npmjs.org/package/express-version-request)
+[![view on npm](http://img.shields.io/npm/l/express-version-request.svg)](https://www.npmjs.org/package/express-version-request)
+[![npm module downloads](http://img.shields.io/npm/dt/express-version-request.svg)](https://www.npmjs.org/package/express-version-request)
+[![Dependency Status](https://david-dm.org/lirantal/express-version-request.svg)](https://david-dm.org/lirantal/express-version-request)
 
 ## What is this?
 
-@TODO
-
-## Installation
-
-Bold people use:
-
-```bash
-yarn add <something>
-```
-
-The rest can use the mundane:
-
-```bash
-npm install --save <something>
-```
+This npm package provides an ExpressJS middleware that sets the request object with a `version` property by parsing a request HTTP header.  
 
 ## Usage
 
-@TODO
+### Set request version statically
+
+If you wish to employ your own logic in some middleware/configuration and set the request version programmaticaly and not by parsing a specific HTTP header:
+
+```js
+const versionRequest = require('express-version-request')
+
+app.use(versionRequest.setVersion('1.2.3'))
+```
+
+Then in later middlewares you will be able to access `req.version` property and it's value set to 1.2.3.
+
+### Set request version by HTTP header
+
+By default, the library will parse the version out of the `X-Api-Version` HTTP header:
+
+```js
+const versionRequest = require('express-version-request')
+
+app.use(versionRequest.setVersionByHeader())
+```
+
+### Set request version by custom HTTP header
+
+If you wish to advise the library which HTTP header to parse to extract the version:
+
+```js
+const versionRequest = require('express-version-request')
+
+app.use(versionRequest.setVersionByHeader('My-HTTP-Header-Name'))
+```
+
+If you define a middleware after versionRequest then you can verify that the version is indeed set:
+
+```js
+app.use((req, res, next) => {
+    console.log(req.version)
+    next()
+  })
+```
+
+## Installation
+
+```bash
+yarn add express-version-request
+```
 
 ## Tests
 
-Project tests:
-
 ```bash
-npm run test
+yarn test
 ```
 
 Project linting:
 
 ```bash
-npm run lint
+yarn lint
 ```
 
 ## Coverage
 
 ```bash
-npm run test:coverage
+yarn test:coverage
 ```
 
 ## Commit
@@ -49,5 +83,9 @@ messages so you should follow it as so:
 
 ```bash
 git add .           # add files to staging
-npm run commit      # use the wizard for the commit message
+yarn commit      # use the wizard for the commit message
 ```
+
+## Author
+
+Liran Tal <liran.tal@gmail.com>
