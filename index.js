@@ -25,6 +25,23 @@ class versionRequest {
     }
   }
 
+  static setVersionByQueryParam (queryParam) {
+    return (req, res, next) => {
+      if (req && req.query) {
+        const version = (queryParam && req.query[queryParam.toLowerCase()]) || req.query['api-version']
+        if (version !== undefined) {
+          if (this.isObject(version)) {
+            req.version = JSON.stringify(version)
+          } else {
+            req.version = version
+          }
+        }
+      }
+
+      next()
+    }
+  }
+
   static isObject (variable) {
     return typeof variable === 'object' || typeof variable === 'function'
   }
