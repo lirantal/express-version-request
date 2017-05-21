@@ -43,8 +43,6 @@ const versionRequest = require('express-version-request')
 app.use(versionRequest.setVersionByHeader('My-HTTP-Header-Name'))
 ```
 
-If you define a middleware after versionRequest then you can verify that the version is indeed set:
-
 ### Set request version by HTTP query parameter
 
 By default, the library will parse the version out of the `api-version` query parameter:
