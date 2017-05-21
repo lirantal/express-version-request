@@ -55,7 +55,7 @@ app.use(versionRequest.setVersionByQueryParam())
 
 ### Set request version by custom HTTP query parameter
 
-If you wish to advise the library which query parameters to parse to extract the version:
+If you wish to advise the library which query parameter to parse to extract the version:
 
 ```js
 const versionRequest = require('express-version-request')
