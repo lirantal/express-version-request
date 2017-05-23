@@ -25,7 +25,7 @@ class versionRequest {
     }
   }
 
-  static setVersionByQueryParam (queryParam, removeQueryParam = false) {
+  static setVersionByQueryParam (queryParam, options = {removeQueryParam: false}) {
     return (req, res, next) => {
       if (req && req.query) {
         const version = (queryParam && req.query[queryParam.toLowerCase()]) || req.query['api-version']
@@ -35,7 +35,7 @@ class versionRequest {
           } else {
             req.version = version
           }
-          if (removeQueryParam) {
+          if (options && options.removeQueryParam) {
             if (queryParam && req.query[queryParam.toLowerCase()]) {
               delete req.query[queryParam.toLowerCase()]
             } else {

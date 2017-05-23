@@ -128,9 +128,10 @@ test('do not allow to set a version on the request object by specifying custom h
 test('custom query param should be deleted from req.query after handling it', t => {
   const versionNumber = 1
   const versionParamName = 'my-api-version-param'
+  const options = {removeQueryParam: true}
 
   t.context.req.query[versionParamName] = versionNumber
-  const middleware = versionRequest.setVersionByQueryParam(versionParamName, true)
+  const middleware = versionRequest.setVersionByQueryParam(versionParamName, options)
 
   middleware(t.context.req, {}, () => {
     t.is(t.context.req.version, versionNumber)
@@ -140,9 +141,10 @@ test('custom query param should be deleted from req.query after handling it', t 
 
 test('default query param should be deleted from req.query after handling it', t => {
   const versionNumber = 1
+  const options = {removeQueryParam: true}
 
   t.context.req.query['api-version'] = versionNumber
-  const middleware = versionRequest.setVersionByQueryParam(null, true)
+  const middleware = versionRequest.setVersionByQueryParam(null, options)
 
   middleware(t.context.req, {}, () => {
     t.is(t.context.req.version, versionNumber)
