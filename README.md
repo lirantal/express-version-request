@@ -62,6 +62,22 @@ const versionRequest = require('express-version-request')
 
 app.use(versionRequest.setVersionByQueryParam('myQueryParam'))
 ```
+#### setVersionByQueryParam options 
+The second parameter of `setVersionByQueryParam` is an options object.
+
+##### Options
+
+`removeQueryParam`
+
+Delete version HTTP query parameter after setting the request object with a `version` property.
+By default it is set to false.
+
+```js
+const versionRequest = require('express-version-request')
+const options = {removeQueryParam: true}
+
+app.use(versionRequest.setVersionByQueryParam('myQueryParam', options))
+```
 
 If you define a middleware after versionRequest then you can verify that the version is indeed set:
 
