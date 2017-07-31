@@ -5,7 +5,7 @@
 [![npm module downloads](http://img.shields.io/npm/dt/express-version-request.svg)](https://www.npmjs.org/package/express-version-request)
 [![Dependency Status](https://david-dm.org/lirantal/express-version-request.svg)](https://david-dm.org/lirantal/express-version-request)
 [![Build Status](https://travis-ci.org/lirantal/express-version-request.svg?branch=master)](https://travis-ci.org/lirantal/express-version-request)
-[![Coverage Status](https://coveralls.io/repos/github/lirantal/express-version-request/badge.svg?branch=master)](https://coveralls.io/github/lirantal/express-version-request?branch=master)
+[![codecov](https://codecov.io/gh/lirantal/express-version-request/branch/master/graph/badge.svg)](https://codecov.io/gh/lirantal/express-version-request)
 
 ## What is this?
 
