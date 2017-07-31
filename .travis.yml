@@ -3,4 +3,8 @@ node_js:
   - "6"
   - "7"
   - "8"
-script: npm run test:coverage
+install:
+  - npm install -g codecov
+script: 
+  - npm run test:coverage
+  - codecov
