@@ -12,8 +12,6 @@ test.beforeEach(t => {
 })
 
 test('dont set a version if req object is not well composed: req is null', t => {
-  const versionNumber = 1
-
   t.context.req = null
   const middleware = versionRequest.setVersionByHeader()
 
@@ -26,8 +24,6 @@ test('dont set a version if req object is not well composed: req is null', t => 
 })
 
 test('dont set a version if req object is not well composed: req is undefined', t => {
-  const versionNumber = 1
-
   t.context.req = undefined
   const middleware = versionRequest.setVersionByHeader()
 
@@ -72,7 +68,6 @@ test('we can set a version on the request object by request headers', t => {
     t.is(t.context.req.version, versionNumber)
   })
 })
-
 
 test('we can manually set a specific version to be string', t => {
   const versionNumber = '1'
