@@ -48,10 +48,14 @@ class versionRequest {
     }
   }
 
-  static setVersionByAcceptHeader () {
+  static setVersionByAcceptHeader (customFunction) {
     return (req, res, next) => {
       if (req && req.headers && req.headers.accept) {
-        req.version = req.headers.accept.split(';')[1].replace('version=', '')
+        if (customFunction && typeof customFunction === 'function') {
+          req.version = customFunction(req.headers.accept)
+        } else {
+          req.version = req.headers.accept.split(';')[1].replace('version=', '')
+        }
       }
 
       next()
