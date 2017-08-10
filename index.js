@@ -48,6 +48,16 @@ class versionRequest {
     }
   }
 
+  static setVersionByAcceptHeader () {
+    return (req, res, next) => {
+      if (req && req.headers && req.headers.accept) {
+        req.version = req.headers.accept.split(';')[1].replace('version=', '')
+      }
+
+      next()
+    }
+  }
+
   static isObject (variable) {
     return typeof variable === 'object' || typeof variable === 'function'
   }
