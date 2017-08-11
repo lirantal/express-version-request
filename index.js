@@ -53,6 +53,9 @@ class versionRequest {
       if (req && req.headers && req.headers.accept) {
         if (customFunction && typeof customFunction === 'function') {
           req.version = customFunction(req.headers.accept)
+          if (typeof req.version !== 'string') {
+            req.version = this.isObject(req.version) ? JSON.stringify(req.version) : req.version.toString()
+          }
         } else {
           let params = req.headers.accept.split(';')[1]
           if (params) {
