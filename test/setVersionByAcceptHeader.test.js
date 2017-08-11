@@ -20,6 +20,44 @@ test('we can set the version using the Accept header version field', t => {
   })
 })
 
+test('we can set the version using the Accept header version field, even if we have multiple parameters', t => {
+  const versionNumber = '1.0.0'
+
+  t.context.req.headers['accept'] = 'application/vnd.company+json;param1=1,version=' + versionNumber + ', param3=3'
+  const middleware = versionRequest.setVersionByAcceptHeader()
+
+  middleware(t.context.req, {}, () => {
+    t.deepEqual(t.context.req.version, versionNumber)
+  })
+})
+
+test('dont set the version if the Accept header has no "version" parameter', t => {
+  t.context.req.headers['accept'] = 'application/vnd.company+json;param1=1, param2=2'
+  const middleware = versionRequest.setVersionByAcceptHeader()
+
+  middleware(t.context.req, {}, () => {
+    t.deepEqual(t.context.req.version, undefined)
+  })
+})
+
+test('dont set the version if the Accept header has no parameters at all', t => {
+  t.context.req.headers['accept'] = 'application/vnd.company+json;'
+  const middleware = versionRequest.setVersionByAcceptHeader()
+
+  middleware(t.context.req, {}, () => {
+    t.deepEqual(t.context.req.version, undefined)
+  })
+})
+
+test('dont set the version if the Accept header has no parameters at all (without ending ;)', t => {
+  t.context.req.headers['accept'] = 'application/vnd.company+json'
+  const middleware = versionRequest.setVersionByAcceptHeader()
+
+  middleware(t.context.req, {}, () => {
+    t.deepEqual(t.context.req.version, undefined)
+  })
+})
+
 test('we can set the version using a custom function to parse the Accept header', t => {
   const versionNumber = '1.0.0'
 

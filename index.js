@@ -54,7 +54,15 @@ class versionRequest {
         if (customFunction && typeof customFunction === 'function') {
           req.version = customFunction(req.headers.accept)
         } else {
-          req.version = req.headers.accept.split(';')[1].replace('version=', '')
+          let params = req.headers.accept.split(';')[1]
+          if (params) {
+            for (let i of params.split(',')) {
+              if (i.indexOf && i.indexOf('version=') === 0) {
+                req.version = i.replace('version=', '')
+                break
+              }
+            }
+          }
         }
       }
 
