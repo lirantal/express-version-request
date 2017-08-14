@@ -49,6 +49,10 @@ class versionRequest {
   }
 
   static setVersionByAcceptHeader (customFunction) {
+    function removeWhitespaces (str) {
+      return str.replace(/\s/g, '')
+    }
+
     return (req, res, next) => {
       if (req && req.headers && req.headers.accept) {
         if (customFunction && typeof customFunction === 'function') {
@@ -58,13 +62,13 @@ class versionRequest {
           }
         } else {
           let params = req.headers.accept.split(';')[1]
+          let paramMap = {}
           if (params) {
             for (let i of params.split(',')) {
-              if (i.indexOf && i.indexOf('version=') === 0) {
-                req.version = i.replace('version=', '')
-                break
-              }
+              let keyValue = i.split('=')
+              paramMap[removeWhitespaces(keyValue[0]).toLowerCase()] = removeWhitespaces(keyValue[1])
             }
+            req.version = paramMap.version
           }
         }
       }

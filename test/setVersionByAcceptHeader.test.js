@@ -31,6 +31,28 @@ test('we can set the version using the Accept header version field, even if we h
   })
 })
 
+test('we can set the version using the Accept header version field, even if it has funky whitespaces', t => {
+  const versionNumber = '1.0.0'
+
+  t.context.req.headers['accept'] = 'application/vnd.company+json; param1=1,      version =' + versionNumber + '  , param3=3'
+  const middleware = versionRequest.setVersionByAcceptHeader()
+
+  middleware(t.context.req, {}, () => {
+    t.deepEqual(t.context.req.version, versionNumber)
+  })
+})
+
+test('we can set the version using the Accept header version field, even if it mixes lower- and uppercase characters', t => {
+  const versionNumber = '1.0.0'
+
+  t.context.req.headers['accept'] = 'application/vnd.company+json; param1=1,      Version =' + versionNumber + '  , param3=3'
+  const middleware = versionRequest.setVersionByAcceptHeader()
+
+  middleware(t.context.req, {}, () => {
+    t.deepEqual(t.context.req.version, versionNumber)
+  })
+})
+
 test('dont set the version if the Accept header has no "version" parameter', t => {
   t.context.req.headers['accept'] = 'application/vnd.company+json;param1=1, param2=2'
   const middleware = versionRequest.setVersionByAcceptHeader()
