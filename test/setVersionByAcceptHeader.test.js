@@ -80,6 +80,43 @@ test('dont set the version if the Accept header has no parameters at all (withou
   })
 })
 
+//  Alternative format
+
+test('we can set the version using the Accept header alternative format', t => {
+  const versionNumber = '1.0.0'
+
+  t.context.req.headers['accept'] = 'application/vnd.company-v' + versionNumber + '+json'
+  const middleware = versionRequest.setVersionByAcceptHeader()
+
+  middleware(t.context.req, {}, () => {
+    t.deepEqual(t.context.req.version, versionNumber)
+  })
+})
+
+test('we can set the version using the Accept header alternative format, even if it has whitespaces', t => {
+  const versionNumber = '1.0.0'
+
+  t.context.req.headers['accept'] = 'application/ vnd.company -v' + versionNumber + ' + json'
+  const middleware = versionRequest.setVersionByAcceptHeader()
+
+  middleware(t.context.req, {}, () => {
+    t.deepEqual(t.context.req.version, versionNumber)
+  })
+})
+
+test('dont set the version, if the alternative format is incorrect', t => {
+  const versionNumber = '1.0.0'
+
+  t.context.req.headers['accept'] = 'application/vnd.company+v' + versionNumber + '/json'
+  const middleware = versionRequest.setVersionByAcceptHeader()
+
+  middleware(t.context.req, {}, () => {
+    t.deepEqual(t.context.req.version, undefined)
+  })
+})
+
+//  Custom function
+
 test('we can set the version using a custom function to parse the Accept header', t => {
   const versionNumber = '1.0.0'
 

@@ -70,6 +70,15 @@ class versionRequest {
             }
             req.version = paramMap.version
           }
+
+          if (req.version === undefined) {
+            const header = removeWhitespaces(req.headers.accept)
+            const start = header.indexOf('-v')
+            const end = header.indexOf('+')
+            if (start !== -1 && end !== -1) {
+              req.version = header.slice(start + 2, end)
+            }
+          }
         }
       }
 
