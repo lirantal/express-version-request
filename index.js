@@ -61,11 +61,11 @@ class versionRequest {
             req.version = this.isObject(req.version) ? JSON.stringify(req.version) : req.version.toString()
           }
         } else {
-          let params = req.headers.accept.split(';')[1]
-          let paramMap = {}
+          const params = req.headers.accept.split(';')[1]
+          const paramMap = {}
           if (params) {
             for (let i of params.split(',')) {
-              let keyValue = i.split('=')
+              const keyValue = i.split('=')
               paramMap[removeWhitespaces(keyValue[0]).toLowerCase()] = removeWhitespaces(keyValue[1])
             }
             req.version = paramMap.version
