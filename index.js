@@ -49,10 +49,6 @@ class versionRequest {
   }
 
   static setVersionByAcceptHeader (customFunction) {
-    function removeWhitespaces (str) {
-      return str.replace(/\s/g, '')
-    }
-
     return (req, res, next) => {
       if (req && req.headers && req.headers.accept) {
         if (customFunction && typeof customFunction === 'function') {
@@ -66,18 +62,13 @@ class versionRequest {
           if (params) {
             for (let i of params.split(',')) {
               const keyValue = i.split('=')
-              paramMap[removeWhitespaces(keyValue[0]).toLowerCase()] = removeWhitespaces(keyValue[1])
+              paramMap[this.removeWhitespaces(keyValue[0]).toLowerCase()] = this.removeWhitespaces(keyValue[1])
             }
             req.version = paramMap.version
           }
 
           if (req.version === undefined) {
-            const header = removeWhitespaces(req.headers.accept)
-            const start = header.indexOf('-v')
-            const end = header.indexOf('+')
-            if (start !== -1 && end !== -1) {
-              req.version = header.slice(start + 2, end)
-            }
+            req.version = this.setVersionByAcceptFormat(req.headers)
           }
         }
       }
@@ -86,8 +77,21 @@ class versionRequest {
     }
   }
 
+  static setVersionByAcceptFormat (headers) {
+    const header = this.removeWhitespaces(headers.accept)
+    const start = header.indexOf('-v')
+    const end = header.indexOf('+')
+    if (start !== -1 && end !== -1) {
+      return header.slice(start + 2, end)
+    }
+  }
+
   static isObject (variable) {
     return typeof variable === 'object' || typeof variable === 'function'
+  }
+
+  static removeWhitespaces (str) {
+    return str.replace(/\s/g, '')
   }
 }
 
