@@ -69,18 +69,21 @@ The second parameter of `setVersionByQueryParam` is an options object.
 
 ### Set request version by 'Accept' header
 
-By default, the library will parse the version from the Accept header, expecting the standard format.
+By default, the library will parse the version from the Accept header, expecting the following format:
+Accept: application/vnd.company+json;version=1.0.0
+For more details about the Accept header format, please refer to the [RFC](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
+
 
 ```js
 const versionRequest = require('express-version-request')
 
 app.use(versionRequest.setVersionByAcceptHeader())
 ```
-#### Parsing using a fallback format
+#### Parsing using an alternative format
 As a fallback, the lib supports an alternative Accept header format:
 Accept: application/vnd.comapny-v1.0.0+json
 
-The lib will try to parse the header using the regular format, and if it doesn't succeed, tries the alternative format.
+The lib will try to parse the header using the default format, and if it doesn't succeed, tries this alternative format.
 The usage is the same as in the case of the regular format:
 
 ```js
@@ -90,13 +93,13 @@ app.use(versionRequest.setVersionByAcceptHeader())
 ```
 #### Parsing using a custom function
 If you wish to use your own parsing, it is possible to pass a function as the first parameter.
-The lib will then call it with the header as the first parameter, and the returned value will be set as version.
+The lib will then call it with the actual value of the Accept header as the first parameter, and the returned value will be set as version.
 The provided function should return a **string**.
 
 ```js
 const versionRequest = require('express-version-request')
-function customParsingFunction() {
-	//custom parsing, that returns a string
+function customParsingFunction(header) {
+	//function body, that parses the header parameter and returns a string
 }
 
 app.use(versionRequest.setVersionByAcceptHeader(customParsingFunction))
