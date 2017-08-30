@@ -1,6 +1,6 @@
 {
   "name": "express-version-request",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "versions an incoming request to Express based on header or URL",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,14 @@
   ],
   "author": "Liran Tal",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lirantal/express-version-request.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lirantal/express-version-request/issues"
+  },
+  "homepage": "https://github.com/lirantal/express-version-request#readme",
   "devDependencies": {
     "ava": "^0.17.0",
     "commitizen": "^2.9.5",
