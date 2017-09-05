@@ -49,7 +49,7 @@ test('we can set the version using the Accept header version field, even if it m
   const middleware = versionRequest.setVersionByAcceptHeader()
 
   middleware(t.context.req, {}, () => {
-    t.deepEqual(t.context.req.version, versionNumber)
+    t.deepEqual(t.context.req.version, versionRequest.formatVersion(versionNumber))
   })
 })
 
@@ -129,28 +129,27 @@ test('we can handle, if the custom function returns a number', t => {
   const middleware = versionRequest.setVersionByAcceptHeader(v => parseFloat(v))
 
   middleware(t.context.req, {}, () => {
-    t.deepEqual(t.context.req.version, versionNumber)
+    t.deepEqual(t.context.req.version, versionRequest.formatVersion(versionNumber))
   })
 })
 
 test('we can handle, if the custom function returns a boolean', t => {
-  const versionNumber = 'true'
+  const versionNumber = true
 
   t.context.req.headers['accept'] = versionNumber
-  const middleware = versionRequest.setVersionByAcceptHeader(v => true)
+  const middleware = versionRequest.setVersionByAcceptHeader(v => versionNumber)
 
   middleware(t.context.req, {}, () => {
-    t.deepEqual(t.context.req.version, versionNumber)
+    t.deepEqual(t.context.req.version, undefined)
   })
 })
 
 test('we can handle, if the custom function returns an object', t => {
-  const versionNumber = '{"alpha":true}'
-
-  t.context.req.headers['accept'] = versionNumber
-  const middleware = versionRequest.setVersionByAcceptHeader(v => { return {alpha: true} })
+  const versionNumber = {alpha: true}
+  t.context.req.headers['accept'] = 1
+  const middleware = versionRequest.setVersionByAcceptHeader(v => { return versionNumber })
 
   middleware(t.context.req, {}, () => {
-    t.deepEqual(t.context.req.version, versionNumber)
+    t.deepEqual(t.context.req.version, JSON.stringify(versionNumber))
   })
 })

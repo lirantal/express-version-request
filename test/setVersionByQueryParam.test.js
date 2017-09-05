@@ -34,29 +34,26 @@ test('dont set a version if req object is not well composed: req is undefined', 
 })
 
 test('dont set a version if req object is not well composed: req.query is undefined', t => {
-  const versionNumber = 1
   t.context.req.query = undefined
   const middleware = versionRequest.setVersionByQueryParam()
 
   middleware(t.context.req, {}, () => {
     t.is(t.context.req.query, undefined)
-    t.not(t.context.req.version, versionNumber)
+    t.is(t.context.req.version, undefined)
   })
 })
 
 test('dont set a version if no version query is set', t => {
-  const versionNumber = false
-
   t.context.req.query = {}
   const middleware = versionRequest.setVersionByQueryParam()
 
   middleware(t.context.req, {}, () => {
-    t.not(t.context.req.version, versionNumber)
+    t.is(t.context.req.version, undefined)
   })
 })
 
 test('we can set a version on the request object by request query parameters', t => {
-  const versionNumber = 1
+  const versionNumber = '1.0.0'
 
   t.context.req.query['api-version'] = versionNumber
   const middleware = versionRequest.setVersionByQueryParam()
@@ -66,15 +63,14 @@ test('we can set a version on the request object by request query parameters', t
   })
 })
 
-
 test('we can manually set a specific version to be string', t => {
-  const versionNumber = '1'
+  const versionNumber = '1.0.0'
 
   t.context.req.query['api-version'] = versionNumber
   const middleware = versionRequest.setVersionByQueryParam()
 
   middleware(t.context.req, {}, () => {
-    t.is(t.context.req.version, versionNumber)
+    t.is(t.context.req.version, versionRequest.formatVersion(versionNumber))
   })
 })
 
@@ -85,7 +81,7 @@ test('we can manually set a specific version to be object', t => {
   const middleware = versionRequest.setVersionByQueryParam()
 
   middleware(t.context.req, {}, () => {
-    t.not(t.context.req.version, versionNumber)
+    t.is(t.context.req.version, JSON.stringify(versionNumber))
   })
 })
 
@@ -97,23 +93,23 @@ test('we can set a version on the request object by specifying custom http query
   const middleware = versionRequest.setVersionByQueryParam(versionParamName)
 
   middleware(t.context.req, {}, () => {
-    t.is(t.context.req.version, versionNumber)
+    t.is(t.context.req.version, versionRequest.formatVersion(versionNumber))
   })
 })
 
 test('we can set a version on the request object by specifying custom http query param as string', t => {
-  const versionNumber = '1'
+  const versionNumber = '1.0.0'
   const versionParamName = 'my-api-version-param'
 
   t.context.req.query[versionParamName] = versionNumber
   const middleware = versionRequest.setVersionByQueryParam(versionParamName)
 
   middleware(t.context.req, {}, () => {
-    t.is(t.context.req.version, versionNumber)
+    t.is(t.context.req.version, versionRequest.formatVersion(versionNumber))
   })
 })
 
-test('do not allow to set a version on the request object by specifying custom http query param by object', t => {
+test('we can set a version on the request object by specifying custom http query param by object', t => {
   const versionNumber = { myVersion: 'alpha' }
   const versionParamName = 'my-api-version-param'
 
@@ -121,12 +117,12 @@ test('do not allow to set a version on the request object by specifying custom h
   const middleware = versionRequest.setVersionByQueryParam(versionParamName)
 
   middleware(t.context.req, {}, () => {
-    t.not(t.context.req.version, versionNumber)
+    t.is(t.context.req.version, JSON.stringify(versionNumber))
   })
 })
 
 test('custom query param should be deleted from req.query after handling it', t => {
-  const versionNumber = 1
+  const versionNumber = '1.0.0'
   const versionParamName = 'my-api-version-param'
   const options = {removeQueryParam: true}
 
@@ -140,7 +136,7 @@ test('custom query param should be deleted from req.query after handling it', t 
 })
 
 test('default query param should be deleted from req.query after handling it', t => {
-  const versionNumber = 1
+  const versionNumber = '1.0.0'
   const options = {removeQueryParam: true}
 
   t.context.req.query['api-version'] = versionNumber

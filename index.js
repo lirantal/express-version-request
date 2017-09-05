@@ -3,7 +3,7 @@
 class versionRequest {
   static setVersion (version) {
     return (req, res, next) => {
-      req.version = version
+      req.version = this.formatVersion(version)
       next()
     }
   }
@@ -12,13 +12,7 @@ class versionRequest {
     return (req, res, next) => {
       if (req && req.headers) {
         const version = (headerName && req.headers[headerName.toLowerCase()]) || req.headers['x-api-version']
-        if (version !== undefined) {
-          if (this.isObject(version)) {
-            req.version = JSON.stringify(version)
-          } else {
-            req.version = version
-          }
-        }
+        req.version = this.formatVersion(version)
       }
 
       next()
@@ -30,11 +24,7 @@ class versionRequest {
       if (req && req.query) {
         const version = (queryParam && req.query[queryParam.toLowerCase()]) || req.query['api-version']
         if (version !== undefined) {
-          if (this.isObject(version)) {
-            req.version = JSON.stringify(version)
-          } else {
-            req.version = version
-          }
+          req.version = this.formatVersion(version)
           if (options && options.removeQueryParam === true) {
             if (queryParam && req.query[queryParam.toLowerCase()]) {
               delete req.query[queryParam.toLowerCase()]
@@ -52,10 +42,7 @@ class versionRequest {
     return (req, res, next) => {
       if (req && req.headers && req.headers.accept) {
         if (customFunction && typeof customFunction === 'function') {
-          req.version = customFunction(req.headers.accept)
-          if (typeof req.version !== 'string') {
-            req.version = this.isObject(req.version) ? JSON.stringify(req.version) : req.version.toString()
-          }
+          req.version = this.formatVersion(customFunction(req.headers.accept))
         } else {
           const params = req.headers.accept.split(';')[1]
           const paramMap = {}
@@ -64,11 +51,11 @@ class versionRequest {
               const keyValue = i.split('=')
               paramMap[this.removeWhitespaces(keyValue[0]).toLowerCase()] = this.removeWhitespaces(keyValue[1])
             }
-            req.version = paramMap.version
+            req.version = this.formatVersion(paramMap.version)
           }
 
           if (req.version === undefined) {
-            req.version = this.setVersionByAcceptFormat(req.headers)
+            req.version = this.formatVersion(this.setVersionByAcceptFormat(req.headers))
           }
         }
       }
@@ -92,6 +79,29 @@ class versionRequest {
 
   static removeWhitespaces (str) {
     return str.replace(/\s/g, '')
+  }
+
+  static formatVersion (version) {
+    if (!version || typeof version === 'function' || version === true) {
+      return undefined
+    }
+    if (typeof version === 'object') {
+      return JSON.stringify(version)
+    }
+    let ver = version.toString()
+    let split = ver.split('.')
+    if (split.length === 3) {
+      return ver
+    }
+    if (split.length < 3) {
+      for (let i = split.length; i < 3; i++) {
+        ver += '.0'
+      }
+      return ver
+    }
+    if (split.length > 3) {
+      return split.slice(0, 3).join('.')
+    }
   }
 }
 
