@@ -1,6 +1,6 @@
 {
   "name": "express-version-request",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "versions an incoming request to Express based on header or URL",
   "main": "index.js",
   "scripts": {
