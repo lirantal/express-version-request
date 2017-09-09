@@ -2,6 +2,7 @@
 
 const test = require('ava')
 const versionRequest = require('../index')
+const sinon = require('sinon')
 
 test.beforeEach(t => {
   t.context.req = {
@@ -90,13 +91,16 @@ test('we can manually set a specific version to be object', t => {
 test('we can set a version on the request object by specifying custom http header as integer', t => {
   const versionNumber = 1
   const versionHeaderName = 'my-api-version-header'
+  const versionRequestSpy = sinon.spy(versionRequest, 'formatVersion')
 
   t.context.req.headers[versionHeaderName] = versionNumber
   const middleware = versionRequest.setVersionByHeader(versionHeaderName)
 
   middleware(t.context.req, {}, () => {
-    t.is(t.context.req.version, versionRequest.formatVersion(versionNumber))
+    t.is(t.context.req.version, versionNumber + '.0.0')
+    t.is(versionRequestSpy.called, true)
   })
+  versionRequestSpy.restore()
 })
 
 test('we can set a version on the request object by specifying custom http header as string', t => {

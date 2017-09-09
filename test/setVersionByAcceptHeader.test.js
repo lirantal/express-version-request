@@ -2,6 +2,7 @@
 
 const test = require('ava')
 const versionRequest = require('../index')
+const sinon = require('sinon')
 
 test.beforeEach(t => {
   t.context.req = {
@@ -49,7 +50,7 @@ test('we can set the version using the Accept header version field, even if it m
   const middleware = versionRequest.setVersionByAcceptHeader()
 
   middleware(t.context.req, {}, () => {
-    t.deepEqual(t.context.req.version, versionRequest.formatVersion(versionNumber))
+    t.deepEqual(t.context.req.version, versionNumber)
   })
 })
 
@@ -124,13 +125,16 @@ test('we can set the version using a custom function to parse the Accept header'
 
 test('we can handle, if the custom function returns a number', t => {
   const versionNumber = '1.1'
+  const versionRequestSpy = sinon.spy(versionRequest, 'formatVersion')
 
   t.context.req.headers['accept'] = versionNumber
   const middleware = versionRequest.setVersionByAcceptHeader(v => parseFloat(v))
 
   middleware(t.context.req, {}, () => {
-    t.deepEqual(t.context.req.version, versionRequest.formatVersion(versionNumber))
+    t.deepEqual(t.context.req.version, versionNumber + '.0')
+    t.is(versionRequestSpy.called, true)
   })
+  versionRequestSpy.restore()
 })
 
 test('we can handle, if the custom function returns a boolean', t => {
