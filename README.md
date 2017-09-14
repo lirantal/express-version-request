@@ -70,7 +70,7 @@ The second parameter of `setVersionByQueryParam` is an options object.
 ### Set request version by 'Accept' header
 
 By default, the library will parse the version from the Accept header, expecting the following format:
-Accept: application/vnd.company+json;version=1.0.0
+**Accept: application/vnd.company+json;version=1.0.0**
 For more details about the Accept header format, please refer to the [RFC](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
 
 
@@ -81,7 +81,12 @@ app.use(versionRequest.setVersionByAcceptHeader())
 ```
 #### Parsing using an alternative format
 As a fallback, the lib supports an alternative Accept header format:
-Accept: application/vnd.comapny-v1.0.0+json
+
+**Accept: application/vnd.comapny-v1.0.0+json**
+
+or
+
+**Accept: application/vnd.comapny.v1.0.0+json**
 
 The lib will try to parse the header using the default format, and if it doesn't succeed, tries this alternative format.
 The usage is the same as in the case of the regular format:

@@ -66,7 +66,10 @@ class versionRequest {
 
   static setVersionByAcceptFormat (headers) {
     const header = this.removeWhitespaces(headers.accept)
-    const start = header.indexOf('-v')
+    let start = header.indexOf('-v')
+    if (start === -1) {
+      start = header.indexOf('.v')
+    }
     const end = header.indexOf('+')
     if (start !== -1 && end !== -1) {
       return header.slice(start + 2, end)
