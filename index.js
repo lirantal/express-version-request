@@ -85,7 +85,7 @@ class versionRequest {
       return str.replace(/\s/g, '')
     }
 
-    return str
+    return ''
   }
 
   static formatVersion (version) {
