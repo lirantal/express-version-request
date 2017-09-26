@@ -80,16 +80,12 @@ class versionRequest {
     }
   }
 
-  static isObject (variable) {
-    return typeof variable === 'object' || typeof variable === 'function'
-  }
-
   static removeWhitespaces (str) {
     if (typeof str === 'string') {
       return str.replace(/\s/g, '')
     }
 
-    return str
+    return ''
   }
 
   static formatVersion (version) {
