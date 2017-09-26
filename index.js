@@ -44,12 +44,15 @@ class versionRequest {
         if (customFunction && typeof customFunction === 'function') {
           req.version = this.formatVersion(customFunction(req.headers.accept))
         } else {
-          const params = req.headers.accept.split(';')[1]
+          const acceptHeader = String(req.headers.accept)
+          const params = acceptHeader.split(';')[1]
           const paramMap = {}
           if (params) {
             for (let i of params.split(',')) {
               const keyValue = i.split('=')
-              paramMap[this.removeWhitespaces(keyValue[0]).toLowerCase()] = this.removeWhitespaces(keyValue[1])
+              if (typeof keyValue === 'object' && keyValue[0] && keyValue[1]) {
+                paramMap[this.removeWhitespaces(keyValue[0]).toLowerCase()] = this.removeWhitespaces(keyValue[1])
+              }
             }
             req.version = this.formatVersion(paramMap.version)
           }
@@ -65,7 +68,8 @@ class versionRequest {
   }
 
   static setVersionByAcceptFormat (headers) {
-    const header = this.removeWhitespaces(headers.accept)
+    const acceptHeader = String(headers.accept)
+    const header = this.removeWhitespaces(acceptHeader)
     let start = header.indexOf('-v')
     if (start === -1) {
       start = header.indexOf('.v')
@@ -81,7 +85,11 @@ class versionRequest {
   }
 
   static removeWhitespaces (str) {
-    return str.replace(/\s/g, '')
+    if (typeof str === 'string') {
+      return str.replace(/\s/g, '')
+    }
+
+    return str
   }
 
   static formatVersion (version) {

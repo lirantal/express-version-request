@@ -81,8 +81,25 @@ test('dont set the version if the Accept header has no parameters at all (withou
   })
 })
 
-//  Alternative format
+test('dont set the version if the Accept header if we cant parse it', t => {
+  t.context.req.headers['accept'] = 'application/json;abd'
+  const middleware = versionRequest.setVersionByAcceptHeader()
 
+  middleware(t.context.req, {}, () => {
+    t.deepEqual(t.context.req.version, undefined)
+  })
+})
+
+test('dont set the version if the Accept header if we cant parse it', t => {
+  t.context.req.headers['accept'] = 42
+  const middleware = versionRequest.setVersionByAcceptHeader()
+
+  middleware(t.context.req, {}, () => {
+    t.deepEqual(t.context.req.version, undefined)
+  })
+})
+
+//  Alternative format
 test('we can set the version using the Accept header alternative format 1', t => {
   const versionNumber = '1.0.0'
 
