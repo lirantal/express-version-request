@@ -4,7 +4,7 @@
   "description": "versions an incoming request to Express based on header or URL",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint *.js",
+    "lint": "standard && eslint *.js",
     "test": "yarn lint && ava",
     "test:watch": "yarn lint && ava --watch",
     "test:coverage": "yarn run lint && nyc --reporter=lcov ava --tap",
@@ -43,7 +43,6 @@
     "docco": "^0.7.0",
     "doxdox": "^2.0.1",
     "eslint": "^3.19.0",
-    "eslint-config-standard": "^10.2.1",
     "eslint-plugin-ava": "^4.2.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-node": "^4.2.2",
@@ -81,7 +80,6 @@
       "ava"
     ],
     "extends": [
-      "eslint-config-standard",
       "plugin:ava/recommended",
       "plugin:node/recommended"
     ],

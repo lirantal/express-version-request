@@ -19,7 +19,7 @@ test('dont set a version if req object is not well composed: req is null', t => 
   middleware(t.context.req, {}, () => {
     t.is(t.context.req, null)
     t.throws(function () {
-      t.context.req.version
+      return t.context.req.version
     })
   })
 })
@@ -31,7 +31,7 @@ test('dont set a version if req object is not well composed: req is undefined', 
   middleware(t.context.req, {}, () => {
     t.is(t.context.req, undefined)
     t.throws(function () {
-      t.context.req.version
+      return t.context.req.version
     })
   })
 })
