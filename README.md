@@ -1,5 +1,7 @@
 # express-version-request
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/lirantal/express-version-request.svg)](https://greenkeeper.io/)
+
 [![view on npm](http://img.shields.io/npm/v/express-version-request.svg)](https://www.npmjs.org/package/express-version-request)
 [![view on npm](http://img.shields.io/npm/l/express-version-request.svg)](https://www.npmjs.org/package/express-version-request)
 [![npm module downloads](http://img.shields.io/npm/dt/express-version-request.svg)](https://www.npmjs.org/package/express-version-request)
