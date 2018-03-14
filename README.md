@@ -8,6 +8,8 @@
 [![Dependency Status](https://david-dm.org/lirantal/express-version-request.svg)](https://david-dm.org/lirantal/express-version-request)
 [![Build Status](https://travis-ci.org/lirantal/express-version-request.svg?branch=master)](https://travis-ci.org/lirantal/express-version-request)
 [![codecov](https://codecov.io/gh/lirantal/express-version-request/branch/master/graph/badge.svg)](https://codecov.io/gh/lirantal/express-version-request)
+[![Security Responsible Disclosure](https://img.shields.io/badge/Security-Responsible%20Disclosure-yellow.svg)](https://github.com/nodejs/security-wg/blob/master/processes/responsible_disclosure_template.md)
+
 
 ## What is this?
 
