@@ -148,45 +148,6 @@ app.use((req, res, next) => {
   })
 ```
 
-## Usage with TypeScript
-
-```ts
-import * as express from 'express';
-import * as versionRequest from 'express-version-request';
-
-const app = express();
-
-// Set request version statically
-app.use(versionRequest.setVersion('1.2.3'));
-
-// Set request version by HTTP header
-app.use(versionRequest.setVersionByHeader());
-
-// Set request version by custom HTTP header
-app.use(versionRequest.setVersionByHeader('My-HTTP-Header-Name'));
-
-// Set request version by HTTP query parameter
-app.use(versionRequest.setVersionByQueryParam());
-
-// Set request version by custom HTTP query parameter
-app.use(versionRequest.setVersionByQueryParam('myQueryParam'));
-
-// Set request version by custom HTTP query parameter with options
-const queryParamOptions: versionRequest.SetVersionByQueryParamOptions = { removeQueryParam: true };
-app.use(versionRequest.setVersionByQueryParam('myQueryParam', queryParamOptions));
-
-// Set request version by 'Accept' header
-app.use(versionRequest.setVersionByAcceptHeader());
-
-// Parsing using a custom function
-const customParsingFunction: versionRequest.CustomParsingFunction = (header) => "1.2.3";
-app.use(versionRequest.setVersionByAcceptHeader(customParsingFunction));
-
-// Version formatting
-const formattedVersion1 = versionRequest.formatVersion("1.2.3.4.5");
-const formattedVersion2 = versionRequest.formatVersion({ v: '1.2.3.4.5' });
-```
-
 ## Installation
 
 ```bash
@@ -198,6 +159,8 @@ yarn add express-version-request
 ```bash
 yarn add --dev @types/express-version-request
 ```
+
+_Note: Don't forget to add types for Express!_
 
 ## Tests
 
