@@ -154,6 +154,14 @@ app.use((req, res, next) => {
 yarn add express-version-request
 ```
 
+## TypeScript Support
+
+```bash
+yarn add --dev @types/express-version-request
+```
+
+_Note: Don't forget to add types for Express!_
+
 ## Tests
 
 ```bash
