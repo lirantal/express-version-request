@@ -41,7 +41,7 @@
     "commitizen": "^2.9.5",
     "cz-conventional-changelog": "^2.1.0",
     "docco": "^0.8.0",
-    "doxdox": "^2.0.1",
+    "doxdox": "^3.0.0",
     "eslint": "^4.11.0",
     "eslint-plugin-ava": "^4.2.0",
     "eslint-plugin-import": "^2.2.0",
