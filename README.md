@@ -1,15 +1,14 @@
 # express-version-request
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/lirantal/express-version-request.svg)](https://greenkeeper.io/)
 
 [![view on npm](http://img.shields.io/npm/v/express-version-request.svg)](https://www.npmjs.org/package/express-version-request)
 [![view on npm](http://img.shields.io/npm/l/express-version-request.svg)](https://www.npmjs.org/package/express-version-request)
 [![npm module downloads](http://img.shields.io/npm/dt/express-version-request.svg)](https://www.npmjs.org/package/express-version-request)
-[![Dependency Status](https://david-dm.org/lirantal/express-version-request.svg)](https://david-dm.org/lirantal/express-version-request)
 [![Build Status](https://travis-ci.org/lirantal/express-version-request.svg?branch=master)](https://travis-ci.org/lirantal/express-version-request)
 [![codecov](https://codecov.io/gh/lirantal/express-version-request/branch/master/graph/badge.svg)](https://codecov.io/gh/lirantal/express-version-request)
 [![Security Responsible Disclosure](https://img.shields.io/badge/Security-Responsible%20Disclosure-yellow.svg)](https://github.com/nodejs/security-wg/blob/master/processes/responsible_disclosure_template.md)
 
+[![express-version-request](https://snyk.io/advisor/npm-package/express-version-request/badge.svg)](https://snyk.io/advisor/npm-package/express-version-request)
 
 ## What is this?
 
