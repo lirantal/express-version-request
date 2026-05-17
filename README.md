@@ -189,6 +189,10 @@ git add .           # add files to staging
 yarn commit      # use the wizard for the commit message
 ```
 
+## Contributing
+
+Please consult [CONTRIBUTING](./CONTRIBUTING.md) for guidelines on contributing to this project.
+
 ## Author
 
 Liran Tal <liran.tal@gmail.com>
