@@ -8,7 +8,6 @@
 [![codecov](https://codecov.io/gh/lirantal/express-version-request/branch/master/graph/badge.svg)](https://codecov.io/gh/lirantal/express-version-request)
 [![Security Responsible Disclosure](https://img.shields.io/badge/Security-Responsible%20Disclosure-yellow.svg)](https://github.com/nodejs/security-wg/blob/master/processes/responsible_disclosure_template.md)
 
-[![express-version-request](https://snyk.io/advisor/npm-package/express-version-request/badge.svg)](https://snyk.io/advisor/npm-package/express-version-request)
 
 ## What is this?
 
