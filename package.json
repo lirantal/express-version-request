@@ -1,8 +1,4 @@
 {
-  "publishConfig": {
-    "provenance": true,
-    "access": "public"
-  },
   "name": "express-version-request",
   "version": "1.7.0",
   "description": "versions an incoming request to Express based on header or URL",
@@ -108,5 +104,9 @@
         "impliedStrict": true
       }
     }
+  },
+  "publishConfig": {
+    "provenance": true,
+    "access": "public"
   }
 }
