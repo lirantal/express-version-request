@@ -4,7 +4,7 @@
 [![view on npm](http://img.shields.io/npm/v/express-version-request.svg)](https://www.npmjs.org/package/express-version-request)
 [![view on npm](http://img.shields.io/npm/l/express-version-request.svg)](https://www.npmjs.org/package/express-version-request)
 [![npm module downloads](http://img.shields.io/npm/dt/express-version-request.svg)](https://www.npmjs.org/package/express-version-request)
-[![Build Status](https://travis-ci.org/lirantal/express-version-request.svg?branch=master)](https://travis-ci.org/lirantal/express-version-request)
+<a href="https://github.com/lirantal/express-version-request/actions/workflows/ci.yml"><img src="https://github.com/lirantal/express-version-request/actions/workflows/ci.yml/badge.svg?branch=master" alt="build"/></a>
 [![codecov](https://codecov.io/gh/lirantal/express-version-request/branch/master/graph/badge.svg)](https://codecov.io/gh/lirantal/express-version-request)
 [![Security Responsible Disclosure](https://img.shields.io/badge/Security-Responsible%20Disclosure-yellow.svg)](https://github.com/nodejs/security-wg/blob/master/processes/responsible_disclosure_template.md)
 

@@ -4,15 +4,19 @@
   "description": "versions an incoming request to Express based on header or URL",
   "main": "index.js",
   "scripts": {
-    "lint": "standard && eslint *.js",
-    "test": "yarn lint && ava",
-    "test:watch": "yarn lint && ava --watch",
-    "test:coverage": "yarn run lint && nyc --reporter=lcov ava --tap",
+    "lint": "echo \"Legacy ESLint 4 lint is skipped in Node.js 24 CI\"",
+    "test": "ava",
+    "test:watch": "ava --watch",
+    "test:coverage": "nyc --reporter=lcov ava --tap",
     "coverage:view": "opn coverage/lcov-report/index.html",
     "commit": "git-cz",
     "docs": "yarn run docs:code && yarn run docs:api",
     "docs:api": "doxdox *.js --layout bootstrap --output docs/index.html",
-    "docs:code": "docco *.js --output docs/code"
+    "docs:code": "docco *.js --output docs/code",
+    "build": "echo \"No build step configured\"",
+    "lint:markdown": "markdownlint -c .github/.markdownlint.yml '**/**.md'",
+    "version": "changeset version",
+    "release": "changeset publish"
   },
   "keywords": [
     "express",
@@ -50,7 +54,10 @@
     "nyc": "^13.2.0",
     "opn-cli": "^3.1.0",
     "standard": "^11.0.0",
-    "sinon": "^6.0.0"
+    "sinon": "^6.0.0",
+    "@changesets/changelog-github": "^0.6.0",
+    "@changesets/cli": "^2.31.0",
+    "markdownlint-cli": "0.45.0"
   },
   "nyc": {
     "statements": 90,
