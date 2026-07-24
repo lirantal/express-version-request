@@ -6,7 +6,6 @@
 [![npm module downloads](http://img.shields.io/npm/dt/express-version-request.svg)](https://www.npmjs.org/package/express-version-request)
 <a href="https://github.com/lirantal/express-version-request/actions/workflows/ci.yml"><img src="https://github.com/lirantal/express-version-request/actions/workflows/ci.yml/badge.svg?branch=master" alt="build"/></a>
 [![codecov](https://codecov.io/gh/lirantal/express-version-request/branch/master/graph/badge.svg)](https://codecov.io/gh/lirantal/express-version-request)
-[![Security Responsible Disclosure](https://img.shields.io/badge/Security-Responsible%20Disclosure-yellow.svg)](https://github.com/nodejs/security-wg/blob/master/processes/responsible_disclosure_template.md)
 
 
 ## What is this?
