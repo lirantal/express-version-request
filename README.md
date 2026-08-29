@@ -72,7 +72,7 @@ The second parameter of `setVersionByQueryParam` is an options object.
 
 By default, the library will parse the version from the Accept header, expecting the following format:
 **Accept: application/vnd.company+json;version=1.0.0**
-For more details about the Accept header format, please refer to the [RFC](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
+For more details about the Accept header format, please refer to the [RFC](https://www.rfc-editor.org/rfc/rfc9110.html).
 
 
 ```js
