@@ -56,7 +56,7 @@
     "standard": "^17.1.2",
     "sinon": "^6.0.0",
     "@changesets/changelog-github": "^1.0.1",
-    "@changesets/cli": "^3.0.3",
+    "@changesets/cli": "^2.31.0",
     "markdownlint-cli": "0.49.1"
   },
   "nyc": {
